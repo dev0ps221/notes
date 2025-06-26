@@ -6,7 +6,7 @@ Core Idea:
 
 When eval() is used on the result of a regex-based replacement or match, forgetting the g flag means only the first match is processed. If the code intends to sanitize, transform, or escape all instances of a potentially dangerous pattern (like variables, function calls, or operators), this omission leaves remaining matches untouched — creating an incomplete mitigation.
 Example:
-```
+```js
 let code = "dangerous(1); dangerous(2);";
 let sanitized = code.replace(/dangerous\(\d+\)/, "safe()");
 // eval(sanitized) gets: "safe(); dangerous(2);" ← second call still live
@@ -34,7 +34,7 @@ ChatGPT a dit :
 
 Great question. Let's go deeper and clarify the subtlety.
 Recap of the Example:
-```
+```js
 let code = "dangerous(1); dangerous(2);";
 let sanitized = code.replace(/dangerous\(\d+\)/, "safe()");
 eval(sanitized);
@@ -55,11 +55,11 @@ Now, to your exact question:
     "You mean with this example if I added the code it wouldn’t execute?"
 ```
 If by "added the code" you mean you added the g flag, then:
-```
+```js
 let sanitized = code.replace(/dangerous\(\d+\)/g, "safe()");
 ```
 Now the output is:
-```
+```js
 "safe(); safe();"
 ```
 And no dangerous() function is called anymore, assuming safe() is safe.
@@ -68,11 +68,11 @@ But if you omit the g flag, any additional dangerous(...) calls after the first 
 Real Risk in a Security Context:
 
 Let’s say dangerous(x) is:
-```
+```js
 function dangerous(x) { alert("gotcha: " + x); }
 ```
 Then the result of eval(sanitized) without g becomes:
-```
+```js
 safe(); dangerous(2); // ← this runs
 ```
 Why This is Dangerous:
