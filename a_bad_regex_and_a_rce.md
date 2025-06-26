@@ -39,15 +39,16 @@ let code = "dangerous(1); dangerous(2);";
 let sanitized = code.replace(/dangerous\(\d+\)/, "safe()");
 eval(sanitized);
 ```
+
 What happens here:
 
     Only the first dangerous(1) is replaced.
 
     sanitized becomes:
-    "safe(); dangerous(2);"
+    ```js "safe(); dangerous(2);" ```
 
     Then eval() executes:
-    safe(); dangerous(2);
+    ```js safe(); dangerous(2); ```
 
 So yes, the second dangerous(2) still executes, because the regex without g only replaced the first match.
 Now, to your exact question:
