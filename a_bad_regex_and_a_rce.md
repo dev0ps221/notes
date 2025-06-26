@@ -92,4 +92,4 @@ Summary:
 
     ❗Yes — without g, the second (and further) instances stay unmodified, and they do execute when passed to eval().
 
-This is what makes forgetting the g flag a real security risk in eval-based contexts: it enables partial bypass of protections.
+**This is what makes forgetting the g flag a real security risk in eval-based contexts: it enables partial bypass of protections.
