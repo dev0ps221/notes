@@ -34,11 +34,11 @@ ChatGPT a dit :
 
 Great question. Let's go deeper and clarify the subtlety.
 Recap of the Example:
-
+```
 let code = "dangerous(1); dangerous(2);";
 let sanitized = code.replace(/dangerous\(\d+\)/, "safe()");
 eval(sanitized);
-
+```
 What happens here:
 
     Only the first dangerous(1) is replaced.
