@@ -42,13 +42,13 @@ eval(sanitized);
 
 What happens here:
 
-    Only the first dangerous(1) is replaced.
+Only the first dangerous(1) is replaced.
 
-    sanitized becomes:
-    ```js "safe(); dangerous(2);" ```
+sanitized becomes:
+```js "safe(); dangerous(2);" ```
 
-    Then eval() executes:
-    ```js safe(); dangerous(2); ```
+Then eval() executes:
+```js safe(); dangerous(2); ```
 
 So yes, the second dangerous(2) still executes, because the regex without g only replaced the first match.
 Now, to your exact question:
